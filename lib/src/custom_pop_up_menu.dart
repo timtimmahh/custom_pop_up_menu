@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+
 import 'platform/platform.dart';
 
 enum PressType {
@@ -46,6 +47,10 @@ class CustomPopupMenu extends StatefulWidget {
     this.verticalMargin = 10.0,
     this.position,
     this.menuOnChange,
+    this.hoverColor,
+    this.focusColor,
+    this.splashColor,
+    this.highlightColor,
   });
 
   final Widget child;
@@ -60,7 +65,10 @@ class CustomPopupMenu extends StatefulWidget {
   final Widget Function() menuBuilder;
   final PreferredPosition? position;
   final void Function(bool)? menuOnChange;
-
+  final Color? hoverColor;
+  final Color? focusColor;
+  final Color? splashColor;
+  final Color? highlightColor;
   @override
   _CustomPopupMenuState createState() => _CustomPopupMenuState();
 }
@@ -191,10 +199,10 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
   Widget build(BuildContext context) {
     var child = Material(
       child: InkWell(
-        hoverColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
+        hoverColor: widget.hoverColor,
+        focusColor: widget.focusColor,
+        splashColor: widget.splashColor,
+        highlightColor: widget.highlightColor,
         child: widget.child,
         onTap: () {
           if (widget.pressType == PressType.singleClick) {

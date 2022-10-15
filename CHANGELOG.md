@@ -1,3 +1,16 @@
+## 1.2.4
+
+- Fix Flutter 3.0.0 warning.
+
+## 1.2.3+1
+
+- Fix bug when tap at menu.
+
+
+## 1.2.3
+
+- Add [enablePassEvent] to pass tap event.
+
 ## 1.2.2
 
 - Notify the menu showing.

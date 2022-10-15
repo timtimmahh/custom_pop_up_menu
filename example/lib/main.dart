@@ -8,12 +8,14 @@ void main() {
 class ChatModel {
   String content;
   bool isMe;
+
   ChatModel(this.content, {this.isMe = false});
 }
 
 class ItemModel {
   String title;
   IconData icon;
+
   ItemModel(this.title, this.icon);
 }
 
@@ -94,7 +96,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         .map(
                           (item) => GestureDetector(
                             behavior: HitTestBehavior.translucent,
-                            onTap: _controller.hideMenu,
+                            onTap: () {
+                              print("onTap");
+                              _controller.hideMenu();
+                            },
                             child: Container(
                               height: 40,
                               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -161,6 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
 // ignore: must_be_immutable
 class MessageContent extends StatelessWidget {
   MessageContent(this.message);
+
   final ChatModel message;
   List<ItemModel> menuItems = [
     ItemModel('复制', Icons.content_copy),
@@ -240,9 +246,17 @@ class MessageContent extends StatelessWidget {
             margin: EdgeInsets.only(right: isMe ? 0 : 10, left: isMe ? 10 : 0),
             child: CustomPopupMenu(
               child: _buildAvatar(isMe, avatarSize),
-              menuBuilder: () => _buildAvatar(isMe, 100),
+              menuBuilder: () => GestureDetector(
+                child: _buildAvatar(isMe, 100),
+                onLongPress: () {
+                  print("onLongPress");
+                },
+                onTap: () {
+                  print("onTap");
+                },
+              ),
               barrierColor: Colors.transparent,
-              pressType: PressType.longPress,
+              pressType: PressType.singleClick,
               arrowColor: isMe ? Colors.blueAccent : Colors.pinkAccent,
               position: PreferredPosition.top,
             ),
